@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D slingrb;
     private GameObject LifeObject;
     private LifeManager lifeManager;
+    private bool isStarted = false; // becomes true when the destroy() coroutine starts. exists to prevent multiple calls
 
     private void Awake()
     {
@@ -91,6 +92,7 @@ public class Projectile : MonoBehaviour
         yield return new WaitForSeconds(releaseDelay);
         spriteRenderer.enabled = true;
         sj.enabled = false;
+        rb.drag = 0.2f;
     }
     private IEnumerator destroy()
     {
@@ -114,18 +116,19 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.collider.tag);
-        if (collision.collider.tag == "Bounds")
+        if (collision.collider.tag == "Bounds" && !isStarted)
         {
-            if(collision.collider.tag == "Bounds")
-            {
-                //rb.bodyType = RigidbodyType2D.Static;
-            }
-            StartCoroutine(destroy());
-
-        }
-        else if (rb.velocity == Vector2.zero && isPressed == false && collision.gameObject.tag != "Bomb")
-        {
+            isStarted = true;
             StartCoroutine(destroy());
         }
     }
-}
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (rb.velocity.magnitude <= 0.01  && isPressed == false && collision.gameObject.tag != "Bomb" && !isStarted)
+        {
+            isStarted = true;
+            StartCoroutine(destroy());
+        }
+    }
+       
+ }

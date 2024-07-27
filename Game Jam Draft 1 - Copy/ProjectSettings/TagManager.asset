@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fox
   - Sticky
   - Bounds
   - Life
@@ -15,6 +14,7 @@ TagManager:
   - Explodable
   - Key
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

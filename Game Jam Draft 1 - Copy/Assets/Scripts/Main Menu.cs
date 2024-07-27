@@ -17,4 +17,8 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("TestLevel");
     }
+    public void TestLevel2()
+    {
+        SceneManager.LoadScene("TestLevel1");
+    }
 }
