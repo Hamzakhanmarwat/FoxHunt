@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private bool isPressed = true;
-    private float releaseDelay;
-    private float maxDragDistance = 2f;
+    private bool isPressed = true; //becomes false when the slingshot is released
+    private float releaseDelay; // delay between release and launch
+    private float maxDragDistance = 2f; // radius around which slingshot can be dragged
+
     public GameObject Slingshot;
     public int count = 10;
     public List<GameObject> points;
@@ -17,9 +18,11 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     private SpringJoint2D sj;
     private Rigidbody2D slingrb;
-    private GameObject LifeObject;
-    private LifeManager lifeManager;
+    private Transform thisTransform;
+    private GameObject LifeObject; //Life Controller Object
+    private LifeManager lifeManager; //Access Life Controller Script
     private bool isStarted = false; // becomes true when the destroy() coroutine starts. exists to prevent multiple calls
+    private Vector3 vector3;
 
     private void Awake()
     {
@@ -30,7 +33,10 @@ public class Projectile : MonoBehaviour
         slingrb = sj.connectedBody;
         LifeObject = GameObject.FindGameObjectWithTag("LifeController");
         lifeManager = LifeObject.GetComponent<LifeManager>();
-        for (int i = 0; i <= count; i++)
+        thisTransform = rb.transform;
+        vector3 = thisTransform.position;
+
+        for (int i = 0; i <= count; i++) // instantiate dots for projectile preview
         {
             GameObject Temp;
             Temp = Instantiate(dot, new Vector3(rb.position.x, rb.position.y, 1), Quaternion.identity);
@@ -46,13 +52,12 @@ public class Projectile : MonoBehaviour
             
         }
     }
-    private void DragBall(Touch touch)
+    private void DragBall(Touch touch) // used to drag slingshot and show predicted path
     {
         Debug.Log(Camera.main.ScreenToWorldPoint(touch.position));
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(touch.position);
         rb.position = mousePosition;
         float distance = Vector2.Distance(mousePosition, slingrb.position);
-        Debug.Log("HKKK");
         isPressed = true;
         rb.isKinematic = true;
         if (distance > maxDragDistance)
@@ -75,9 +80,9 @@ public class Projectile : MonoBehaviour
         }
         GameObject[] arg = points.ToArray();
     }
-    private void Up()
+
+    private void Up() // called when slingshot is released
     {
-        Debug.Log("OKK");
         isPressed = false;
         rb.isKinematic = false;
         for (int i = 0; i <= count; i++)
@@ -87,23 +92,22 @@ public class Projectile : MonoBehaviour
         StartCoroutine(Release());
     }
 
-    private IEnumerator Release()
+    private IEnumerator Release() // started when slingshot is released
     {
         yield return new WaitForSeconds(releaseDelay);
         spriteRenderer.enabled = true;
         sj.enabled = false;
         rb.drag = 0.2f;
     }
-    private IEnumerator destroy()
+    private IEnumerator destroy() // started to destroy and respawn new slingshot
     {
-        yield return new WaitForSeconds(1);
-        //Vector3 pos = Spawner.transform.position;
-        lifeManager.LifeReduce();
+        yield return new WaitForSeconds(2);
+        lifeManager.LifeReduce(); // reduces life by 1
         if (lifeManager.lives != 0)
         {
             Debug.Log(lifeManager.lives);
-            GameObject tempXI = Instantiate(Slingshot, rb.gameObject.transform.parent.position, Quaternion.identity);
-            tempXI.transform.parent = rb.transform.parent.gameObject.transform.parent;
+            GameObject tempXI = Instantiate(Slingshot, vector3, Quaternion.identity);
+            //tempXI.transform.parent = rb.transform.parent.gameObject.transform.parent;
             Destroy(rb.gameObject.transform.parent.gameObject);
             Debug.Log("Respawn");
             
@@ -116,7 +120,12 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.collider.tag);
-        if (collision.collider.tag == "Bounds" && !isStarted)
+        if ((collision.collider.tag == "Bounds" && !isStarted)) //colliding with bounds means immediate respwan
+        {
+            isStarted = true;
+            StartCoroutine(destroy());
+        }
+        if ((collision.collider.tag == "Sticky" && !isStarted)) //colliding with sticky means immediate respwan
         {
             isStarted = true;
             StartCoroutine(destroy());
@@ -124,7 +133,7 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (rb.velocity.magnitude <= 0.01  && isPressed == false && collision.gameObject.tag != "Bomb" && !isStarted)
+        if (rb.velocity.magnitude <= 0.05 && isPressed == false && collision.gameObject.tag != "Bomb" && !isStarted) // when projectile is in contact with a surface and has near 0 velocity
         {
             isStarted = true;
             StartCoroutine(destroy());

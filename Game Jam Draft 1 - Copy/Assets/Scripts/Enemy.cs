@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if(collision.gameObject.tag == "Projectile")
+        if(collision.gameObject.tag == "Projectile" || collision.gameObject.tag == "Explosion")
         {
             Debug.Log("Trigger");
             animator.SetBool("isDead", true);
@@ -39,9 +39,10 @@ public class Enemy : MonoBehaviour
         thisCollider.isTrigger = false;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.drag = 2;
-        rb.AddForce(new Vector2(6, 4), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(9, 7), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.2f);
+        rb.gravityScale = 20;
         yield return new WaitForSeconds(2);
-        //rb.gravityScale = 20;
         Instantiate(skull , rb.transform.position, Quaternion.identity);
         Destroy(rb.gameObject);
         Debug.Log("Yo");
