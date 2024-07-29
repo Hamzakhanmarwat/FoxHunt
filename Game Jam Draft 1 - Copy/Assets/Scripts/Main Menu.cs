@@ -5,20 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+   
+    // Update is called once per frame
     public void PlayGame()
     {
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadSceneAsync("Sling Scene");
     }
-    public void Return()
+
+    public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
-    }
-    public void TestLevel()
-    {
-        SceneManager.LoadScene("TestLevel");
-    }
-    public void TestLevel2()
-    {
-        SceneManager.LoadScene("TestLevel1");
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 }
