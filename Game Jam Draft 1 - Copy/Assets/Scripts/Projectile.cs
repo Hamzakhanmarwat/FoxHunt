@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
         Vector3 firstdot = new Vector3(-rb.transform.localPosition.x, -rb.transform.localPosition.y, rb.transform.localPosition.z);
         for (int i = 0; i <= count; i++)
         {
-            points[i].transform.position = new Vector3(rb.position.x, rb.position.y, 1) + firstdot * dotDistance * (i + 1);
+            points[i].transform.position = new Vector3(rb.position.x, rb.position.y, 1) + firstdot * dotDistance * (i + 2);
         }
         GameObject[] arg = points.ToArray();
     }
