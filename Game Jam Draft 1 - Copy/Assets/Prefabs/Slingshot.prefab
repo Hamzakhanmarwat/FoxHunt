@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2442632297988489538}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Slingshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525243699228668239, guid: e3d137eb1d0235946868fd99863f998e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7930986706681973223, guid: e3d137eb1d0235946868fd99863f998e, type: 3}
       propertyPath: m_Color.a
@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 105578128346731326, guid: 9d33524fd1abcdf4f83b91395eea4b5f, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 105578128346731326, guid: 9d33524fd1abcdf4f83b91395eea4b5f, type: 3}
       propertyPath: m_TagString

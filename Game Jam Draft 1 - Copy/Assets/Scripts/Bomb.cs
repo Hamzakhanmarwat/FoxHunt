@@ -20,7 +20,7 @@ public class Bomb : MonoBehaviour
             Instantiate(explosion, rb.transform.position, Quaternion.identity);
             trigger--;
             dead = true;
-            Destroy(collision.transform.parent.gameObject);
+            Destroy(collision.gameObject);
             Destroy(rb.gameObject);
         }
         else if (collision.gameObject.tag == "Projectile" && trigger == 1 && !dead)

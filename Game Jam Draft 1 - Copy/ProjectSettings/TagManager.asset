@@ -16,6 +16,7 @@ TagManager:
   - Projectile
   - Enemy
   - Explosion
+  - Arm
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - Explodable
+  - Projectile
   - 
   - 
   - 

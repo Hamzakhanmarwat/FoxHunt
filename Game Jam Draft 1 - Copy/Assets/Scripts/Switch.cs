@@ -9,10 +9,14 @@ public class Switch : MonoBehaviour
     private Rigidbody2D switchrb;
     [SerializeField] private int time;
     [SerializeField] private int type; //type 1 = joint, type 2 = destory
+
+    private SpriteRenderer spriteRenderer;
+    private Color green = Color.green;
     void Awake()
     {
         thisObject = GetComponent<Rigidbody2D>();
         switchrb = switchobject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -23,8 +27,9 @@ public class Switch : MonoBehaviour
         {
             thisObject.bodyType = RigidbodyType2D.Static;
         }
-        else if (collision.gameObject != switchobject && collision.gameObject.tag != "Immune")
+        else if (collision.gameObject.tag == "Projectile")
         {
+            spriteRenderer.color = green;
             if (type == 1)
             {
                 StartCoroutine(joint(collision));

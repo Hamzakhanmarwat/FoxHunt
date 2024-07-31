@@ -5,9 +5,10 @@ using UnityEngine;
 public class Arm : MonoBehaviour
 {
     public GameObject player;
+    public bool isReleased = false;
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !isReleased)
         {
             Vector3 difference = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) - transform.position;
             difference.Normalize();

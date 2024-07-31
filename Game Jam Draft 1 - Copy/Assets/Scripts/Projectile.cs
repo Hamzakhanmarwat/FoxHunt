@@ -8,21 +8,28 @@ public class Projectile : MonoBehaviour
     private float releaseDelay; // delay between release and launch
     private float maxDragDistance = 2f; // radius around which slingshot can be dragged
 
-    public GameObject Slingshot;
-    public int count = 10;
-    public List<GameObject> points;
-    public GameObject dot;
-    public float dotDistance;
-    SpriteRenderer spriteRenderer;
+    public GameObject Slingshot; //prefab object to be instantiated
+    public int count = 10; // number of dots in predicted path
+    public List<GameObject> points; // list for dots
+    public GameObject dot; // dots prefab
+    public float dotDistance; //distance between dots
+    SpriteRenderer spriteRenderer; // sprite renderer of slingshot
 
-    private Rigidbody2D rb;
-    private SpringJoint2D sj;
-    private Rigidbody2D slingrb;
-    private Transform thisTransform;
+    private Rigidbody2D rb; // rigidbody of projectile
+    private SpringJoint2D sj; // springjoint of slingshot
+    private Rigidbody2D slingrb; // rigidbody of sling
+    private Transform thisTransform; //transform of projectile
+
     private GameObject LifeObject; //Life Controller Object
     private LifeManager lifeManager; //Access Life Controller Script
+    private GameObject Arm;
+    private Arm arm;
+
     private bool isStarted = false; // becomes true when the destroy() coroutine starts. exists to prevent multiple calls
-    private Vector3 vector3;
+    private Vector3 vector3; //spawn point
+
+    private GameObject Player; //player GameObject
+    
 
     private void Awake()
     {
@@ -35,6 +42,10 @@ public class Projectile : MonoBehaviour
         lifeManager = LifeObject.GetComponent<LifeManager>();
         thisTransform = rb.transform;
         vector3 = thisTransform.position;
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Arm = GameObject.FindGameObjectWithTag("Arm");
+        arm = Arm.GetComponent<Arm>();
+        arm.isReleased = false;
 
         for (int i = 0; i <= count; i++) // instantiate dots for projectile preview
         {
@@ -83,6 +94,7 @@ public class Projectile : MonoBehaviour
 
     private void Up() // called when slingshot is released
     {
+        arm.isReleased = true;
         isPressed = false;
         rb.isKinematic = false;
         for (int i = 0; i <= count; i++)
@@ -107,7 +119,7 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log(lifeManager.lives);
             GameObject tempXI = Instantiate(Slingshot, vector3, Quaternion.identity);
-            //tempXI.transform.parent = rb.transform.parent.gameObject.transform.parent;
+            tempXI.transform.parent = Player.transform;
             Destroy(rb.gameObject.transform.parent.gameObject);
             Debug.Log("Respawn");
             

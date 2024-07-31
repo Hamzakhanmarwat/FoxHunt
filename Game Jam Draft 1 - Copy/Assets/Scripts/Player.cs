@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         LifeObject = GameObject.FindGameObjectWithTag("LifeController");
-        Physics2D.IgnoreLayerCollision(3, 3);
+        Physics2D.IgnoreLayerCollision(3, 6);
         lifeManager = LifeObject.GetComponent<LifeManager>();
     }
 
