@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5274784299119751820}
   - component: {fileID: 4357002766290254916}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Life 2
   m_TagString: Life
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 7722725042117267256}
   - component: {fileID: 4040638860024175691}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Life 1
   m_TagString: Life
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 732587550956923681}
   - component: {fileID: 2674695175363088792}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Life 3
   m_TagString: Life
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,8 +389,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5204059079536057655}
-  - {fileID: 5071247144467301343}
   - {fileID: 7933585330226195849}
+  - {fileID: 5071247144467301343}
   - {fileID: 323623496468518876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

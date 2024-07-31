@@ -8,11 +8,13 @@ public class Explosion : MonoBehaviour
     public Collider2D thisobject;
     private GameObject[] explodeable;
     private float radius = 5f;
+    private SpriteRenderer spriteRenderer;
     private void Awake()
     {
         explodeable = GameObject.FindGameObjectsWithTag("Explodable");
         thisobject = GetComponent<Collider2D>();
         StartCoroutine(despawn());
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Log("I'm Alive");
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,7 +30,10 @@ public class Explosion : MonoBehaviour
     }
     IEnumerator despawn()
     {
+        
         yield return new WaitForSeconds(0.75f);
+        spriteRenderer.enabled = false;
+        yield return new WaitForSeconds(1);
         Debug.Log(thisobject);
         Destroy(thisobject.gameObject);
         

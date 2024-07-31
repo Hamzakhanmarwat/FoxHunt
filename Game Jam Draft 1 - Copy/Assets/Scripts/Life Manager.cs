@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Tilemaps;
@@ -6,8 +7,7 @@ using UnityEngine;
 public class LifeManager : MonoBehaviour
 {
     public int lives = 3;
-    private GameObject[] Life;
-    private int lifeinverse = 0;
+    public GameObject[] Life;
     private GameObject[] Enemies;
     public int enemyCount;
     private bool messageShown = false;
@@ -15,6 +15,7 @@ public class LifeManager : MonoBehaviour
     void Awake()
     {
         Life = GameObject.FindGameObjectsWithTag("Life");
+        Array.Sort(Life, (a, b) => a.name.CompareTo(b.name));
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemyCount = Enemies.Length;
     }
@@ -22,16 +23,14 @@ public class LifeManager : MonoBehaviour
     // Update is called once per frame
     public void LifeReduce()
     {
-        Destroy(Life[lifeinverse]);
-        lifeinverse++;
+        Destroy(Life[lives - 1]);
         lives--;
     }
     public void Death()
     {
         while (lives != 0)
         {
-            Destroy(Life[lifeinverse]);
-            lifeinverse++;
+            Destroy(Life[lives - 1]);
             lives--;
         }
     }
