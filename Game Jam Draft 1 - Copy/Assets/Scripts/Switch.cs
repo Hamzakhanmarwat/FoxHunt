@@ -29,23 +29,24 @@ public class Switch : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Projectile")
         {
+            collision.rigidbody.bodyType = RigidbodyType2D.Static;
             spriteRenderer.color = green;
             if (type == 1)
             {
-                StartCoroutine(joint(collision));
+                StartCoroutine(joint());
             }
             else if (type == 2)
             {
-                StartCoroutine(despawn(collision));
+                StartCoroutine(despawn());
 
             }
         }
-        IEnumerator joint(Collision2D collision)
+        IEnumerator joint()
         {
             yield return new WaitForSeconds(time);
             switchrb.bodyType = RigidbodyType2D.Dynamic;
         }
-        IEnumerator despawn(Collision2D collision)
+        IEnumerator despawn()
         {
             yield return new WaitForSeconds(time);
             Destroy(switchobject);
