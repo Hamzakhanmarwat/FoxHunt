@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
+
+        LevelFailPanel.SetActive(false);
+        LevelPassPanel.SetActive(false);
         if (Instance == null)
         {
             Instance = this;
@@ -51,6 +54,6 @@ public class GameManager : MonoBehaviour
 
     public void LevelPassed()
     {
-        LevelPassPanel.SetActive(false);
+        LevelPassPanel.SetActive(true);
     }
 }
