@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     private GameObject LifeObject;
     private LifeManager lifeManager;
     public GameObject skull;
+    public bool reverse = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,7 +41,14 @@ public class Enemy : MonoBehaviour
         thisCollider.isTrigger = false;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.drag = 2;
-        rb.AddForce(new Vector2(9, 7), ForceMode2D.Impulse);
+        if (!reverse)
+        {
+            rb.AddForce(new Vector2(9, 7), ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(new Vector2(-9, -7), ForceMode2D.Impulse);
+        }
         yield return new WaitForSeconds(0.2f);
         rb.gravityScale = 20;
         yield return new WaitForSeconds(2);

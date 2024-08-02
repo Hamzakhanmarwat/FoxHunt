@@ -8,9 +8,13 @@ public class Portals : MonoBehaviour
     [SerializeField] private Transform PurplePortal;
     [SerializeField] private Transform Direction;
     private GameObject projectile;
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         projectile = collision.gameObject;
+        Vector3 speed = projectile.gameObject.GetComponent<Rigidbody2D>().velocity;
+        float speedChange = speed.magnitude;
         projectile.transform.position = PurplePortal.transform.position;
         Vector3 direction = Direction.position - PurplePortal.position;
         direction = Vector3.Normalize(direction);

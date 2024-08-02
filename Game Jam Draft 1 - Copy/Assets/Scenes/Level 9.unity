@@ -6243,6 +6243,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8105969135544111175, guid: 04f3fb70d1d117940a10ab42ba4f7927, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8671817816941835084, guid: 04f3fb70d1d117940a10ab42ba4f7927, type: 3}
       propertyPath: m_FlipX
       value: 1
@@ -7029,6 +7033,10 @@ PrefabInstance:
     - target: {fileID: 7357326713707064798, guid: 04f3fb70d1d117940a10ab42ba4f7927, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105969135544111175, guid: 04f3fb70d1d117940a10ab42ba4f7927, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8671817816941835084, guid: 04f3fb70d1d117940a10ab42ba4f7927, type: 3}
       propertyPath: m_FlipX

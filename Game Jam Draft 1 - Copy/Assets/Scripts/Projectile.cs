@@ -110,24 +110,23 @@ public class Projectile : MonoBehaviour
         spriteRenderer.enabled = true;
         sj.enabled = false;
         rb.drag = 0.2f;
+        
+        yield return new WaitForSeconds(0.5f);
+        lifeManager.LifeReduce(); // reduces life by 1
+
+        if (lifeManager.lives != 0)
+        {
+            GameObject tempXI = Instantiate(Slingshot, vector3, Quaternion.identity);
+            tempXI.transform.parent = Player.transform;
+            Debug.Log(lifeManager.lives);
+            Debug.Log("Respawn");
+        }
     }
     private IEnumerator destroy() // started to destroy and respawn new slingshot
     {
         yield return new WaitForSeconds(2);
-        lifeManager.LifeReduce(); // reduces life by 1
-        if (lifeManager.lives != 0)
-        {
-            Debug.Log(lifeManager.lives);
-            GameObject tempXI = Instantiate(Slingshot, vector3, Quaternion.identity);
-            tempXI.transform.parent = Player.transform;
-            Destroy(rb.gameObject.transform.parent.gameObject);
-            Debug.Log("Respawn");
-            
-        }
-        else
-        {
-            Destroy(rb.gameObject.transform.parent.gameObject);
-        }
+        Destroy(rb.gameObject.transform.parent.gameObject);
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
