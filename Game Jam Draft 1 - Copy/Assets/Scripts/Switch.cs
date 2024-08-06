@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Switch : MonoBehaviour
@@ -8,7 +9,10 @@ public class Switch : MonoBehaviour
     private Rigidbody2D thisObject;
     private Rigidbody2D switchrb;
     [SerializeField] private int time;
-    [SerializeField] private int type; //type 1 = joint, type 2 = destory
+    [SerializeField] private int type; //type 1 = joint, type 2 = destory type 3 = move platform
+    [SerializeField] private float speed;
+    private Transform plat;
+    private Transform target;
 
     private SpriteRenderer spriteRenderer;
     private Color green = Color.green;
@@ -40,6 +44,15 @@ public class Switch : MonoBehaviour
                 StartCoroutine(despawn());
 
             }
+            else if (type == 3)
+            {
+                plat = switchobject.transform.GetChild(0);
+                target = switchobject.transform.GetChild(1);
+                while (plat.position != target.position) {
+                    plat.position = Vector2.Lerp(plat.position, target.position, speed * Time.deltaTime);
+                    Debug.Log("Look what I've done for you");
+                }
+            }
         }
         IEnumerator joint()
         {
@@ -50,6 +63,13 @@ public class Switch : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             Destroy(switchobject);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        if(type == 3)
+        {
+            Gizmos.DrawLine(plat.position, target.position);
         }
     }
 }

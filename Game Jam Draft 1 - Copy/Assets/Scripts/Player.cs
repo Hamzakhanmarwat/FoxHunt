@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Bomb")
+        if(collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Tree")
         {
             lifeManager.Death();
+            Destroy(gameObject); 
         }
     }
 }

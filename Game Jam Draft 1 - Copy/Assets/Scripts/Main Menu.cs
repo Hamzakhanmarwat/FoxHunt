@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("Sling Scene");
+        SceneManager.LoadSceneAsync("Level 1");
     }
 
     public void BackToMainMenu()

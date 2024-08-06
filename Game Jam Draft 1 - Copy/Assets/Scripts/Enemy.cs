@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if(collision.gameObject.tag == "Projectile" || collision.gameObject.tag == "Explosion")
+        if(collision.gameObject.tag == "Projectile" || collision.gameObject.tag == "Explosion" || collision.gameObject.tag == "Tree")
         {
             Debug.Log("Trigger");
             animator.SetBool("isDead", true);

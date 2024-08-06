@@ -20,7 +20,7 @@ public class Bomb : MonoBehaviour
             Instantiate(explosion, rb.transform.position, Quaternion.identity);
             trigger--;
             dead = true;
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             Destroy(rb.gameObject);
         }
         else if (collision.gameObject.tag == "Projectile" && trigger == 1 && !dead)
@@ -29,7 +29,13 @@ public class Bomb : MonoBehaviour
             trigger--;
             Destroy(rb.gameObject);
         }
-        
+        else if (collision.gameObject.tag == "Tree" && trigger == 1 && !dead)
+        {
+            Instantiate(explosion, rb.transform.position, Quaternion.identity);
+            trigger--;
+            Destroy(rb.gameObject);
+        }
+
 
     }
     private void OnDrawGizmos()

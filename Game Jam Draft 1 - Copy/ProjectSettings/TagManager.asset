@@ -17,6 +17,8 @@ TagManager:
   - Enemy
   - Explosion
   - Arm
+  - Tree
+  - GameManager
   layers:
   - Default
   - TransparentFX
