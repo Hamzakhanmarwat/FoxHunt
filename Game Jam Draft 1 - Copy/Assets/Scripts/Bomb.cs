@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    [SerializeField] private float BombRadius = 5f; 
     [SerializeField] private GameObject explosion;
     private Rigidbody2D rb;
     private int trigger = 1;
@@ -40,6 +41,6 @@ public class Bomb : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 5f);
+        Gizmos.DrawWireSphere(transform.position, BombRadius);
     }
 }
