@@ -44,6 +44,7 @@ public class Bomb : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(transform.position, 5f);
         Gizmos.DrawWireSphere(transform.position, BombRadius);
     }
 }
