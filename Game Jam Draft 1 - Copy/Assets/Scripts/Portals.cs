@@ -20,6 +20,8 @@ public class Portals : MonoBehaviour
         direction = Vector3.Normalize(direction);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * speedChange;
         Debug.Log(direction * speedChange);
+
+        //AudioManager.Instance.PlaySFX("Teleport Enter");
         Debug.Log("Teleport");
 
     }

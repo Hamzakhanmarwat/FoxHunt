@@ -28,9 +28,14 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Trigger");
             animator.SetBool("isDead", true);
-            
-            
-
+            if(collision.gameObject.tag == "Explosion")
+            {
+                AudioManager.Instance.PlaySFX("Bomb");
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX("Enemy Death");
+            }
             StartCoroutine(death());
         }
     }

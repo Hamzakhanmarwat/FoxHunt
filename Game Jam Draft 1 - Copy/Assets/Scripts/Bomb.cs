@@ -23,18 +23,21 @@ public class Bomb : MonoBehaviour
             dead = true;
             //Destroy(collision.gameObject);
             Destroy(rb.gameObject);
+            AudioManager.Instance.PlaySFX("Bomb");
         }
         else if (collision.gameObject.tag == "Projectile" && trigger == 1 && !dead)
         {
             Instantiate(explosion, rb.transform.position,Quaternion.identity );
             trigger--;
             Destroy(rb.gameObject);
+            AudioManager.Instance.PlaySFX("Bomb");
         }
         else if (collision.gameObject.tag == "Tree" && trigger == 1 && !dead)
         {
             Instantiate(explosion, rb.transform.position, Quaternion.identity);
             trigger--;
             Destroy(rb.gameObject);
+            AudioManager.Instance.PlaySFX("Bomb");
         }
 
 

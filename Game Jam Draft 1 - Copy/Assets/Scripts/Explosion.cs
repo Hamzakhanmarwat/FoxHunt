@@ -37,7 +37,5 @@ public class Explosion : MonoBehaviour
         Debug.Log(thisobject);
         Destroy(thisobject.gameObject);
         
-        
-        
     }
 }

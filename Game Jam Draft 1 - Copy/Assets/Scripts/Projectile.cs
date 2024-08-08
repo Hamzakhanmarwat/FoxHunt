@@ -29,8 +29,8 @@ public class Projectile : MonoBehaviour
     private Vector3 vector3; //spawn point
 
     private GameObject Player; //player GameObject
-    
 
+    bool flag=true;//avoid sfx sound loop
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -60,11 +60,15 @@ public class Projectile : MonoBehaviour
         if (Input.touchCount > 0 && isPressed == true && Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position).x <= 18.5 && Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position).y <= 6.7)
         {
             DragBall(Input.GetTouch(0));
-            
+            if (flag)
+            {
+                AudioManager.Instance.PlaySFX("Stretch");
+                flag = false;
+            }
         }
     }
     private void DragBall(Touch touch) // used to drag slingshot and show predicted path
-    {
+    {   
         Debug.Log(Camera.main.ScreenToWorldPoint(touch.position));
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(touch.position);
         rb.position = mousePosition;
@@ -94,6 +98,7 @@ public class Projectile : MonoBehaviour
 
     private void Up() // called when slingshot is released
     {
+
         arm.isReleased = true;
         isPressed = false;
         rb.isKinematic = false;
@@ -106,7 +111,9 @@ public class Projectile : MonoBehaviour
 
     private IEnumerator Release() // started when slingshot is released
     {
+        AudioManager.Instance.SFXSource.Stop();
         yield return new WaitForSeconds(releaseDelay);
+        AudioManager.Instance.PlaySFX("Release");
         spriteRenderer.enabled = true;
         sj.enabled = false;
         rb.drag = 0.2f;
@@ -125,6 +132,7 @@ public class Projectile : MonoBehaviour
     private IEnumerator destroy() // started to destroy and respawn new slingshot
     {
         yield return new WaitForSeconds(2);
+        AudioManager.Instance.PlaySFX("Perishable Wall");//replace with "Projectile Destroy"
         Destroy(rb.gameObject.transform.parent.gameObject);
         
     }

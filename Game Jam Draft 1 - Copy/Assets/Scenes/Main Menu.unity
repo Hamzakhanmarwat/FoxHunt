@@ -4073,6 +4073,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: fa6c97329bd85f6458f1ed9377de4421, type: 3}
   - name: Release
     clip: {fileID: 8300000, guid: 9b62f28cf941f144da0379fbecfb48da, type: 3}
+  - name: Bomb
+    clip: {fileID: 8300000, guid: 76df4c73c425fa5429e021f15352a3b0, type: 3}
+  - name: Anvil
+    clip: {fileID: 8300000, guid: 76df4c73c425fa5429e021f15352a3b0, type: 3}
   musicSource: {fileID: 2036423023}
   SFXSource: {fileID: 1308757337}
 --- !u!4 &940773280
@@ -4602,7 +4606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5acd19566ae9e6443b64c65eeb6f835b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25843b44177b9ed4cb00dd39217c67ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
